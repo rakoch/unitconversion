@@ -1,7 +1,5 @@
 package com.rak.unitconversion.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 @Entity
-@Table(name = "TEMPERATURE_CONVERSION", uniqueConstraints={
-	    @UniqueConstraint(columnNames = {"unitin", "unitout"})
-	})
+@Table(name = "TEMPERATURE_CONVERSION")
+//, uniqueConstraints={
+//	    @UniqueConstraint(columnNames = {"unitin", "unitout"})
+//	})
 public class TemperatureConversion extends AbstractAuditedEntity {
 	
 	/**
@@ -26,13 +27,15 @@ public class TemperatureConversion extends AbstractAuditedEntity {
     @GeneratedValue(strategy=GenerationType.AUTO) 
 	private Long id;
 	
-	@ManyToOne(cascade=CascadeType.ALL) 
-	@JoinColumn(name = "value", nullable = false)
-	private TemperatureUnit unitIn;
+	@ManyToOne
+	@Fetch(FetchMode.JOIN)
+	@JoinColumn(referencedColumnName = "value", nullable = false)
+	private TemperatureUnit unitin;
 	
-	@ManyToOne(cascade=CascadeType.ALL) 
-	@JoinColumn(name = "value", nullable = false)
-	private TemperatureUnit unitOut;
+	@ManyToOne
+	@Fetch(FetchMode.JOIN)
+	@JoinColumn(referencedColumnName = "value", nullable = false)
+	private TemperatureUnit unitout;
 	
 	private String formula;
 
@@ -47,20 +50,21 @@ public class TemperatureConversion extends AbstractAuditedEntity {
 		this.id = id;
 	}
 
-	public TemperatureUnit getUnitIn() {
-		return unitIn;
+
+	public TemperatureUnit getUnitin() {
+		return unitin;
 	}
 
-	public void setUnitIn(TemperatureUnit unitIn) {
-		this.unitIn = unitIn;
+	public void setUnitin(TemperatureUnit unitin) {
+		this.unitin = unitin;
 	}
 
-	public TemperatureUnit getUnitOut() {
-		return unitOut;
+	public TemperatureUnit getUnitout() {
+		return unitout;
 	}
 
-	public void setUnitOut(TemperatureUnit unitOut) {
-		this.unitOut = unitOut;
+	public void setUnitout(TemperatureUnit unitout) {
+		this.unitout = unitout;
 	}
 
 	public String getFormula() {

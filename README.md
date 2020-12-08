@@ -41,7 +41,7 @@
 <b>Build Unit Conversion App - TODO make this part of deploy</b>
 
 - get mysql: `docker pull mysql`
-- start test db: `docker run --name mysql -p  127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD="password" mysql &`
+- start test db: `docker run --name mysql -p 127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD="password" mysql &`
 - build app: `mvn install`
 
 <b>Remove all previous containers and images (assuming only working on this app)</b>

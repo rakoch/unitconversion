@@ -9,7 +9,7 @@ import com.rak.unitconversion.model.VolumeUnitEnum;
 @Repository
 public interface VolumeConversionRepository extends JpaRepository<VolumeConversion, Long> {
 	 
-	VolumeConversion findByUnitInAndUnitOut(VolumeUnitEnum in, VolumeUnitEnum out);
+	VolumeConversion findByUnitinAndUnitout(VolumeUnitEnum unitIn, VolumeUnitEnum unitOuts);
 
 }
 

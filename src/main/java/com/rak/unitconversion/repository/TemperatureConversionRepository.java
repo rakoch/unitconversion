@@ -9,7 +9,7 @@ import com.rak.unitconversion.model.TemperatureUnitEnum;
 @Repository
 public interface TemperatureConversionRepository extends JpaRepository<TemperatureConversion, Long> {
 	 
-	TemperatureConversion findByUnitInAndUnitOut(TemperatureUnitEnum in, TemperatureUnitEnum out);
+	TemperatureConversion findByUnitinAndUnitout(TemperatureUnitEnum unitIn, TemperatureUnitEnum unitOut);
 
 }
 

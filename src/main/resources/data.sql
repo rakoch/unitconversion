@@ -16,7 +16,7 @@ VALUES
 (6, now(), now(), 'GALLONS')
 
 
-insert into TEMPERATURE_CONVERSION(id, created, last_updated, unit_in, unit_out, formula)
+insert into TEMPERATURE_CONVERSION(id, created, last_updated, unitin, unitout, formula)
 VALUES
 (1, now(), now(), 'KELVIN', 'CELCIUS', '%f - 273.1')
 (2, now(), now(), 'KELVIN', 'FAHRENHEIT', '(%f − 273.15) * (9/5) + 32')
@@ -32,7 +32,7 @@ VALUES
 (12, now(), now(), 'RANKINE', 'CELCIUS', '(%f - 491.67) × (5/9)')
 
 
-insert into VOLUME_CONVERSION(id, created, last_updated, unit_in, unit_out, formula)
+insert into VOLUME_CONVERSION(id, created, last_updated, unitin, unitout, formula)
 VALUES
 (1, now(), now(), 'LITERS', 'TABLESPOONS', '%f * 67.628')
 (2, now(), now(), 'LITERS', 'CUBICINCHES', '%f * 61.024')
