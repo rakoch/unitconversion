@@ -16,7 +16,7 @@ import org.hibernate.annotations.Fetch;
 //, uniqueConstraints={
 //	    @UniqueConstraint(columnNames = {"unitin", "unitout"})
 //	})
-public class TemperatureConversion extends AbstractAuditedEntity {
+public class TemperatureConversion extends AbstractAuditedEntity implements UnitConversionModel {
 	
 	/**
 	 * 

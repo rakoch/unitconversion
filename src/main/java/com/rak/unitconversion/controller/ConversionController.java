@@ -1,6 +1,5 @@
 package com.rak.unitconversion.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.rak.unitconversion.model.TemperatureUnitEnum;
+import com.rak.unitconversion.service.UnitConversionRequest;
+import com.rak.unitconversion.service.UnitConversionResult;
 import com.rak.unitconversion.service.UnitConversionService;
-import com.rak.unitconversion.service.TemperatureConversionRequest;
-import com.rak.unitconversion.service.TemperatureConversionResult;
 
 @RestController
 @RequestMapping("/")
@@ -26,10 +23,13 @@ public class ConversionController {
 	// TODO pass in strings and create factory that delivers command pattern that is an interface or abstract class for results...
 	
 	@GetMapping("/{inUnit}/{outUnit}/{value}")
-	public List<TemperatureConversionResult> getConversion(@PathVariable(required = true) TemperatureUnitEnum inUnit, 
-							   @PathVariable(required = true) TemperatureUnitEnum outUnit, @PathVariable(required = true) BigDecimal foo) {
-		List<TemperatureConversionRequest> requestList = new ArrayList<TemperatureConversionRequest>();
-		List<TemperatureConversionResult> resultList = service.convertTemperature(requestList);
+	public List<UnitConversionResult> getConversion(@PathVariable(required = true) String inUnit, 
+							   @PathVariable(required = true) String outUnit, @PathVariable(required = true) String value) {
+		List<UnitConversionRequest> requestList = new ArrayList<UnitConversionRequest>();
+		UnitConversionRequest request = new UnitConversionRequest();
+		request.setInUnit(inUnit);
+		request.setOutUnit(outUnit);
+		List<UnitConversionResult> resultList = service.convertUnits(requestList);
 		return resultList;
 
 	}

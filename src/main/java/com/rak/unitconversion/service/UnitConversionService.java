@@ -1,16 +1,12 @@
 package com.rak.unitconversion.service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.rak.unitconversion.model.TemperatureConversion;
 import com.rak.unitconversion.repository.TemperatureConversionRepository;
-import com.udojava.evalex.Expression;
 
 @Component
 public class UnitConversionService {
@@ -19,37 +15,27 @@ public class UnitConversionService {
 	TemperatureConversionRepository tempConvRepository;
 
 	
-	public List<TemperatureConversionResult> convertTemperature(List<TemperatureConversionRequest> requestList) {
+	public List<UnitConversionResult> convertUnits(List<UnitConversionRequest> requestList) {
 		
-		List<TemperatureConversionResult> resultList = new ArrayList<TemperatureConversionResult>();
+		List<UnitConversionResult> resultList = new ArrayList<UnitConversionResult>();
 		
-		for(TemperatureConversionRequest request : requestList) {
-			TemperatureConversion tempConversion = tempConvRepository.findByUnitInAndUnitOut(request.getInputUnit(), request.getTargetUnit());
+		for(UnitConversionRequest request : requestList) {
 
-			TemperatureConversionResult result = new TemperatureConversionResult();
-			result.setRequest(request);
-			if(tempConversion != null) {
-				String formula = tempConversion.getFormula();
-				String formulaExpression = String.format(formula, request.getValue());
-				Expression expression = new Expression(formulaExpression);
-				//expression.setPrecision(2);
-				BigDecimal systemResult = expression.eval();
-				systemResult = systemResult.setScale(2, RoundingMode.CEILING); 
-				BigDecimal inputResult = request.getValue().setScale(2, RoundingMode.CEILING);
-				if(systemResult.equals(inputResult)) {
-					result.setResultStatus(ResultStatus.CORRECT);
-					result.setMsg(String.format("System and input answer equal: %s",systemResult.toString()));
-				}
-				else {
-					result.setResultStatus(ResultStatus.INCORRECT);
-					result.setMsg(String.format("System Answer : %s; Inputted Answer: %s",systemResult.toString(), inputResult.toString()));
-				}
-			
-			}
-			else {
+			AbstractUnitConversionCmd conversionCmd;
+			try {
+				 conversionCmd =
+						UnitConversionFactory.getConversionCommand(request.getInUnit(), request.getOutUnit());
+			} catch (Exception e) {
+				// TODO think of a better way maybe not used exceptions
+				UnitConversionResult result = new UnitConversionResult();
+				result.setRequest(request);
 				result.setResultStatus(ResultStatus.INVALID);
-				result.setMsg(String.format("Conversion not found for request: %s",request));
-			}
+				result.setMsg(e.getMessage());
+				resultList.add(result);
+				continue;
+			} 
+
+			UnitConversionResult result = conversionCmd.convert(request);
 			
 			resultList.add(result);
 		}

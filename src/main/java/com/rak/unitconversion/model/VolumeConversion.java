@@ -1,6 +1,5 @@
 package com.rak.unitconversion.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +16,7 @@ import org.hibernate.annotations.FetchMode;
 //, uniqueConstraints={
 //	    @UniqueConstraint(columnNames = {"unitin", "unitout"})
 //	})
-public class VolumeConversion extends AbstractAuditedEntity {
+public class VolumeConversion extends AbstractAuditedEntity implements UnitConversionModel {
 	
 	/**
 	 * 
@@ -50,7 +49,6 @@ public class VolumeConversion extends AbstractAuditedEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 
 	public VolumeUnit getUnitin() {

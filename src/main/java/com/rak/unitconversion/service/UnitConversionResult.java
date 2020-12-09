@@ -1,16 +1,19 @@
 package com.rak.unitconversion.service;
 
-public class TemperatureConversionResult {
+public class UnitConversionResult {
 	
-	private TemperatureConversionRequest request;
+	private UnitConversionRequest request;
 	private ResultStatus resultStatus;
 	private String msg; 
-	public TemperatureConversionRequest getRequest() {
+
+	public UnitConversionRequest getRequest() {
 		return request;
 	}
-	public void setRequest(TemperatureConversionRequest request) {
+
+	public void setRequest(UnitConversionRequest request) {
 		this.request = request;
 	}
+
 	public ResultStatus getResultStatus() {
 		return resultStatus;
 	}
@@ -23,6 +26,5 @@ public class TemperatureConversionResult {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-
 	
 }
