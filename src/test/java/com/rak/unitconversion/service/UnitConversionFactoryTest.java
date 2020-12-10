@@ -1,7 +1,6 @@
 package com.rak.unitconversion.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class UnitConversionFactoryTest {
@@ -30,6 +29,14 @@ class UnitConversionFactoryTest {
 	void testValidateUnitPairs() {
 		boolean result = UnitConversionFactory.validateUnitPairs("Fahrenheit", "Rankine");
 		assert result == true;
+		
+		Assertions.assertThrows(InvalidUnitCombinationException.class, () -> {
+			UnitConversionFactory.validateUnitPairs("Fahrenheit", "Gallons");
+		});
+
+		Assertions.assertThrows(InvalidUnitTypeException.class, () -> {
+			UnitConversionFactory.validateUnitPairs("Fahrenheit", "Dog");
+		});
 	}
 
 	@Test

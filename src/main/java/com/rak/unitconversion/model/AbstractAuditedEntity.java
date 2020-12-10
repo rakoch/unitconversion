@@ -22,13 +22,13 @@ public abstract class AbstractAuditedEntity implements Serializable {
 	private static final long serialVersionUID = -8244472840602247983L;
 
 	@CreationTimestamp
-	@Column(name = "CREATEDDTTM")
+	@Column(name = "CREATEDTS")
 	private Date created;
 
 	@UpdateTimestamp
 	@Version // use timestamp for optimistic locking versions
 	@Type(type = "dbtimestamp") // use database time instead of vm time
-	@Column(name = "LASTUPDDTTM")
+	@Column(name = "UPDATEDTS")
 	private Date lastUpdated;
 
 	// TODO need to introduce authentication & principal for this to work 
