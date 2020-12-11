@@ -30,18 +30,35 @@ class UnitConversionFactoryTest {
 		boolean result = UnitConversionFactory.validateUnitPairs("Fahrenheit", "Rankine");
 		assert result == true;
 		
+		result = UnitConversionFactory.validateUnitPairs("Kelvin", "Fahrenheit");
+		assert result == true;
+		
+		
+		result = UnitConversionFactory.validateUnitPairs("cups", "liters");
+		assert result == true;
+		
+		Assertions.assertThrows(InvalidUnitCombinationException.class, () -> {
+			UnitConversionFactory.validateUnitPairs("gallons", "Kelvin");
+		});
+		
 		Assertions.assertThrows(InvalidUnitCombinationException.class, () -> {
 			UnitConversionFactory.validateUnitPairs("Fahrenheit", "Gallons");
 		});
 
 		Assertions.assertThrows(InvalidUnitTypeException.class, () -> {
-			UnitConversionFactory.validateUnitPairs("Fahrenheit", "Dog");
+			UnitConversionFactory.validateUnitPairs("dog", "Celsius");
 		});
+		
+
+
 	}
 
 	@Test
 	void testGetConversionCommand() {
-		//fail("Not yet implemented");
+//		AbstractUnitConversionCmd tempConvFahrToRankCommand = UnitConversionFactory.getConversionCommand("Fahrenheit", "Rankine");
+//		assert (tempConvFahrToRankCommand != null);
+//		UnitConversionResult result = tempConvFahrToRankCommand.convert("84.2");
+//		assert(result != null);
 	}
 
 }

@@ -24,7 +24,7 @@ public class VolumeUnit extends AbstractAuditedEntity {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name="value", unique = true)
-	private VolumeUnitEnum volumesUnitEnum;
+	private VolumeUnitEnum volumeUnitEnum;
 
 	public VolumeUnit() {
 		super();
@@ -41,13 +41,13 @@ public class VolumeUnit extends AbstractAuditedEntity {
 	}
 
 
-	public VolumeUnitEnum getVolumesUnitEnum() {
-		return volumesUnitEnum;
+	public VolumeUnitEnum getVolumeUnitEnum() {
+		return volumeUnitEnum;
 	}
 
 
-	public void setVolumesUnitEnum(VolumeUnitEnum volumesUnitEnum) {
-		this.volumesUnitEnum = volumesUnitEnum;
+	public void setVolumeUnitEnum(VolumeUnitEnum volumeUnitEnum) {
+		this.volumeUnitEnum = volumeUnitEnum;
 	}
 
 

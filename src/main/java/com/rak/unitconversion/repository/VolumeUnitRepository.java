@@ -4,9 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.rak.unitconversion.model.VolumeUnit;
+import com.rak.unitconversion.model.VolumeUnitEnum;
 
 @Repository
-public interface VoluemUnitRepository extends JpaRepository<VolumeUnit, Long> {
-	 
-}
+public interface VolumeUnitRepository extends JpaRepository<VolumeUnit, Long> {
 
+	VolumeUnit findByVolumeUnitEnum(VolumeUnitEnum volumeUnitEnum);
+
+}

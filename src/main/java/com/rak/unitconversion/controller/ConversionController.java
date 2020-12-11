@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,20 +22,27 @@ public class ConversionController {
 	UnitConversionService service;
 
 
-	// TODO pass in strings and create factory that delivers command pattern that is an interface or abstract class for results...
 	
 	@GetMapping("/{inUnit}/{outUnit}/{value}")
-	public List<UnitConversionResult> getConversion(@PathVariable(required = true) String inUnit, 
+	public UnitConversionResult getConversion(@PathVariable(required = true) String inUnit, 
 							   @PathVariable(required = true) String outUnit, @PathVariable(required = true) String value) {
 		List<UnitConversionRequest> requestList = new ArrayList<UnitConversionRequest>();
 		UnitConversionRequest request = new UnitConversionRequest();
 		request.setInUnit(inUnit);
 		request.setOutUnit(outUnit);
+		request.setValue(value);
+		requestList.add(request);
 		List<UnitConversionResult> resultList = service.convertUnits(requestList);
-		return resultList;
+		return resultList.get(0);
 
 	}
 
 
+	@PostMapping("/")
+	public List<UnitConversionResult> getConversions(@RequestBody List<UnitConversionRequest> requestList) {
+
+		return service.convertUnits(requestList);
+
+	}
 
 }

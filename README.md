@@ -58,7 +58,7 @@
 #### Run app as Java in Eclipse AFTER starting mysql container
 - remove any previous mysql and unit conversion docker containers and images
 - `docker run --name mysql -p  127.0.0.1:3306:3306 -e MYSQL_ROOT_PASSWORD="password" mysql &`
-- Run from within eclipse by using ‘Run as -> Java Application’ on the SchedulerApplication.java
+- Run from within eclipse by using ‘Run as -> Java Application’ on the UnitconversionApplication.java
 - Test with swagger: [http://localhost:8080/unitconversion/swagger-ui.html](http://localhost:8080/unitconversion/swagger-ui.html)
 
 #### Run app from command line using spring-boot:run AFTER starting mysql container
