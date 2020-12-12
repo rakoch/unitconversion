@@ -5,6 +5,7 @@ public class UnitConversionRequest {
 	private String inUnit;
 	private String outUnit;
 	private String value;
+	private String answer;
 	
 
 	public String getInUnit() {
@@ -26,10 +27,18 @@ public class UnitConversionRequest {
 	public void setValue(String value) {
 		this.value = value;
 	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	@Override
 	public String toString() {
-		return "UnitConversionRequest [inUnit=" + inUnit + ", outUnit=" + outUnit + ", value=" + value + "]";
+		return "UnitConversionRequest [inUnit=" + inUnit + ", outUnit=" + outUnit + ", value=" + value + ", answer="
+				+ answer + "]";
 	}
+
 
 
 	

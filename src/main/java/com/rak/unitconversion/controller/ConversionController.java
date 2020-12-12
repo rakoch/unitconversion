@@ -21,22 +21,21 @@ public class ConversionController {
 	@Autowired
 	UnitConversionService service;
 
-
-	
-	@GetMapping("/{inUnit}/{outUnit}/{value}")
-	public UnitConversionResult getConversion(@PathVariable(required = true) String inUnit, 
-							   @PathVariable(required = true) String outUnit, @PathVariable(required = true) String value) {
+	@GetMapping("/{inUnit}/{outUnit}/{value}/{answer}")
+	public UnitConversionResult getConversion(@PathVariable(required = true) String inUnit,
+			@PathVariable(required = true) String outUnit, @PathVariable(required = true) String value,
+			@PathVariable(required = true) String answer) {
 		List<UnitConversionRequest> requestList = new ArrayList<UnitConversionRequest>();
 		UnitConversionRequest request = new UnitConversionRequest();
 		request.setInUnit(inUnit);
 		request.setOutUnit(outUnit);
 		request.setValue(value);
+		request.setAnswer(answer);
 		requestList.add(request);
 		List<UnitConversionResult> resultList = service.convertUnits(requestList);
 		return resultList.get(0);
 
 	}
-
 
 	@PostMapping("/")
 	public List<UnitConversionResult> getConversions(@RequestBody List<UnitConversionRequest> requestList) {

@@ -17,15 +17,14 @@ public class UnitConversionService {
 			UnitConversionResult result = null;
 			try {
 				conversionCmd = UnitConversionFactory.getConversionCommand(request.getInUnit(), request.getOutUnit());
-				result = conversionCmd.convert(request.getValue());
+				result = conversionCmd.convertAndCheck(request.getValue(), request.getAnswer());
 
 			} catch (Exception e) {
-				// TODO think of a better way maybe not used exceptions
 				result = new UnitConversionResult();
-				result.setRequest(request);
 				result.setResultStatus(ResultStatus.INVALID);
 				result.setMsg(e.getMessage() != null ? e.getMessage() : e.toString());
 			}
+			result.setRequest(request);
 			resultList.add(result);
 		}
 
