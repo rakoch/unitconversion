@@ -20,10 +20,11 @@ public abstract class AbstractUnitConversionCmd {
 	}
 
 	/**
-	 * For the units for which this command class was instantiated, convert the
-	 * given value and check it matches given answer (allowing .5 delta).
+	 * Convert and check. For the units for which this command class was
+	 * instantiated, convert the given value and check that it matches the given
+	 * answer [after rounding to tenths place].
 	 * 
-	 * @param value conversion input number
+	 * @param value  conversion input number
 	 * @param answer conversion input number to check
 	 * @return partially completed UnitConversionResult minus the original request
 	 *         which is left up to caller to populate. TODO make a new class with
@@ -31,7 +32,7 @@ public abstract class AbstractUnitConversionCmd {
 	 */
 	public UnitConversionResult convertAndCheck(String value, String answer) {
 		UnitConversionResult result = new UnitConversionResult();
-		
+
 		// guard validation & String to BD conversion
 		// TODO compress/make more efficient
 		if (value == null || value.isBlank()) {
@@ -41,15 +42,15 @@ public abstract class AbstractUnitConversionCmd {
 		}
 		BigDecimal valueBD = validateAndGetBigDecimalFromString(value, result);
 		ResultStatus rs = result.getResultStatus();
-		if((rs != null) && (rs != ResultStatus.CORRECT)) {
+		if ((rs != null) && (rs != ResultStatus.CORRECT)) {
 			return result;
 		}
 		BigDecimal answerBD = validateAndGetBigDecimalFromString(answer, result);
 		rs = result.getResultStatus();
-		if((rs != null) && (rs != ResultStatus.CORRECT)) {
+		if ((rs != null) && (rs != ResultStatus.CORRECT)) {
 			return result;
 		}
-		
+
 		if (unitConversionModel != null) {
 
 			String formula = unitConversionModel.getFormula();
@@ -57,11 +58,9 @@ public abstract class AbstractUnitConversionCmd {
 			Expression expression = new Expression(formulaExpression);
 			// expression.setPrecision(2);
 			BigDecimal systemAnswer = expression.eval();
-			systemAnswer = systemAnswer.setScale(2, RoundingMode.HALF_UP);
-			answerBD = answerBD.setScale(2, RoundingMode.HALF_UP);
-			BigDecimal delta = systemAnswer.subtract(answerBD);
-		    // delta is larger than -.5 and less than .5
-			if ( delta.compareTo(new BigDecimal(-.5)) > 0 && delta.compareTo(BigDecimal.valueOf(.5)) < 0) {
+			systemAnswer = systemAnswer.setScale(1, RoundingMode.HALF_UP);
+			answerBD = answerBD.setScale(1, RoundingMode.HALF_UP);
+			if (systemAnswer.equals(answerBD)) {
 				result.setResultStatus(ResultStatus.CORRECT);
 				result.setMsg(String.format("System and input answer equal: %s", systemAnswer.toString()));
 			} else {
@@ -84,6 +83,7 @@ public abstract class AbstractUnitConversionCmd {
 		try {
 			// TODO implement or get NaN rather than use exception
 			bdValue = new BigDecimal(value);
+			result.setResultStatus(ResultStatus.CORRECT); // temporarily set (not really needed)
 		} catch (NumberFormatException e) {
 			result.setResultStatus(ResultStatus.INCORRECT);
 			result.setMsg(String.format("Inputted Answer: '%s' incorrect", value));

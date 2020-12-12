@@ -18,9 +18,20 @@
 
 ## TODO
 - make better input mechanism - cli that accepts spreadsheet or front end web ui that allows spreadsheet import or table entry component
-- authorization/login
-- tests
+- introduce authentication/login
+- more/better tests
 - remove db uname/passwords from config files and set from environment
+- javadoc needs to be completed along with code comments and cleanup
+- probably should move some classes around into subpackages to clean things up from that perspective.
+- status reporting for validation and conversion among different abstractions could use cleaned up - used the same result status for the most part and this got messy - maybe should have independent status objects for different abstraction layers.
+- don't rely on exceptions for validation - typically a bad practice from a performance & resource perspective but I took some shortcuts due to the amount of time spent
+- decision to use Command factory pattern outside of Spring for cleaner code caused some complexity in that I had to write a SpringContext class which made the test also dependent on Spring application context - so need to investigate best practice/cleaner way 
+- Could cache unit conversion commands retrieved from command factory and re-use rather than always get a new one from factory based on the unit pair.
+- updated docker and the check for verifying db up before starting application container is not working all of the time now. Needs to be investigated.
+- used database which was not clear if necessary or not but wanted to show docker/container and database use, the intent being to make it more expandable 
+- re-think use of Enums - typically like to use enums instead of passing strings around but decided to partially expose Strings as input parameters given the requirements (wanted to be able to report invalid for any bad string units rather than just prevent bad strings from being used)
+- Use of Enums and Database tables somewhat representing them makes things messy/complicated to a degree - see UnitConversionFactory enum-to-string and enum-to-model cache mess - maybe should not have made unit types in db or maybe should have just skipped the enums 
+- expose endpoints/api to update unit tables and conversion tables
 
 ## How to remove all previous docker containers and images (assuming you can do this in your local environment)
 - `docker stop $(docker ps -aq)`

@@ -1,7 +1,7 @@
 insert into temperature_unit(id, createdts, updatedts, value)
 VALUES
 (1, now(), now(), 'KELVIN'),
-(2, now(), now(), 'CELCIUS'),
+(2, now(), now(), 'CELSIUS'),
 (3, now(), now(), 'FAHRENHEIT'),
 (4, now(), now(), 'RANKINE');
 
@@ -18,18 +18,18 @@ VALUES
 
 insert into temperature_conversion(id, createdts, updatedts, unitin_value, unitout_value, formula)
 VALUES
-(1, now(), now(), 'KELVIN', 'CELCIUS', '%f - 273.1'),
+(1, now(), now(), 'KELVIN', 'CELSIUS', '%f - 273.1'),
 (2, now(), now(), 'KELVIN', 'FAHRENHEIT', '(%f - 273.15) * (9/5) + 32'),
 (3, now(), now(), 'KELVIN', 'RANKINE', '%f * (9/5)'),
-(4, now(), now(), 'CELCIUS', 'KELVIN', '%f + 273.1'),
-(5, now(), now(), 'CELCIUS', 'FAHRENHEIT', '%f * (9/5) + 32'),
-(6, now(), now(), 'CELCIUS', 'RANKINE', '%f * (9/5) + 491.67'),
+(4, now(), now(), 'CELSIUS', 'KELVIN', '%f + 273.1'),
+(5, now(), now(), 'CELSIUS', 'FAHRENHEIT', '%f * (9/5) + 32'),
+(6, now(), now(), 'CELSIUS', 'RANKINE', '%f * (9/5) + 491.67'),
 (7, now(), now(), 'FAHRENHEIT', 'KELVIN', '(%f - 32) * (5/9) + 273.15'),
-(8, now(), now(), 'FAHRENHEIT', 'CELCIUS', '(%f - 32) * (5/9)'),
+(8, now(), now(), 'FAHRENHEIT', 'CELSIUS', '(%f - 32) * (5/9)'),
 (9, now(), now(), 'FAHRENHEIT', 'RANKINE', '%f + 459.67'),
 (10, now(), now(), 'RANKINE', 'KELVIN', '%f * (5/9)'),
 (11, now(), now(), 'RANKINE', 'FAHRENHEIT', '%f - 459.67'),
-(12, now(), now(), 'RANKINE', 'CELCIUS', '(%f - 491.67) * (5/9)');
+(12, now(), now(), 'RANKINE', 'CELSIUS', '(%f - 491.67) * (5/9)');
 
 
 insert into volume_conversion(id, createdts, updatedts, unitin_value, unitout_value, formula)
