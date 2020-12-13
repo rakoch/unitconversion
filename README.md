@@ -98,9 +98,14 @@
 
 
 
-### In Swagger
-- in the browser enter the link for openapi/swagger ui and try out the endpoint (click try it, then blue execute button): http://localhost:8080/swagger-ui.html
+### Swagger URL again...
+- in the browser enter the link for openapi/swagger ui and try out the endpoint (click try it, then blue execute button): http://localhost:8080/unitconversion/swagger-ui.html
 
+## Jenkins as Docker Container
+- Build Jenkins Image: `docker build -f DockerfileJenkinsSetup -t gustavoapolinario/jenkins-docker .`
+- Run container on unix/linux/mac: `docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home --name Jenkins_Docker gustavoapolinario/jenkins-docker`
+- Run container on windows: `docker run -d -p 8080:8080 -v H:\jenkins_data\docker.sock:/var/run/docker.sock -v H:\jenkins_home:/var/jenkins_home --name Jenkins_Docker gustavoapolinario/jenkins-docker`
+- retrieve password: `docker exec Jenkins_Docker cat /var/jenkins_home/secrets/initialAdminPassword`
 ## How to run Integration Tests (No real tests yet)
 - Have to download source from https://github.com/rakoch/unitconversion.git
 - use master branch
@@ -115,7 +120,8 @@
 - use spring initilzr  - web, actuator, devtools - see pom.xml
 - generate
 - unzip generated zip file and place in workspace
-- cd to directory and `git init`create or copy .gitignoregit add .
+- cd to directory and `git init`create or copy .gitignore
+- git add .
 - git commit -m "first commit"
 - go to github and create a new private repo with nothing in it (name unitconversion)
 - At the top of your GitHub repository's Quick Setup page, click  to copy the remote repository URL.
