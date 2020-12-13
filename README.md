@@ -105,7 +105,9 @@
 - Build Jenkins Image: `docker build -f DockerfileJenkinsSetup -t gustavoapolinario/jenkins-docker .`
 - Run container on unix/linux/mac: `docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /var/jenkins_home:/var/jenkins_home --name Jenkins_Docker gustavoapolinario/jenkins-docker`
 - Run container on windows: `docker run -d -p 8080:8080 -v H:\jenkins_data\docker.sock:/var/run/docker.sock -v H:\jenkins_home:/var/jenkins_home --name Jenkins_Docker gustavoapolinario/jenkins-docker`
-- retrieve password: `docker exec Jenkins_Docker cat /var/jenkins_home/secrets/initialAdminPassword`
+- 1st time retrieve password: `docker exec Jenkins_Docker cat /var/jenkins_home/secrets/initialAdminPassword` and then create new user as admin when access jenkins 1st time
+- open url in browser (can't run app and jenkins at same time): [http://localhost:8080](http://localhost:8080.)
+
 ## How to run Integration Tests (No real tests yet)
 - Have to download source from https://github.com/rakoch/unitconversion.git
 - use master branch
